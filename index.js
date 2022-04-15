@@ -1,8 +1,12 @@
+// Import required packages
 const { MongoClient } = require("mongodb");
 
 const Discord = require('discord.js');
 const { Intents } = require('discord.js')
 
+const fs = require('fs');
+
+// Initialization
 const credentials = require('./config.json');
 const prefix = '.'
 
@@ -40,6 +44,13 @@ async function check(userId) {
     }
 }
 
+async function addCoins(userId, amount) {
+    const userDetails = await users.findOne( { id: userId } );
+    const coins = userDetails.coins;
+
+    await users.updateOne( { id: userId }, { $set: { coins: coins + amount } } );
+}
+
 client.on('ready', async () => {
     await initMongo();
     console.log('MongoDB Init Complete.')
@@ -54,8 +65,19 @@ client.on('messageCreate', async message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
 
+    if ( fs.existsSync(`./commands/${command}.js`) === false ) {
+        const em = {
+            title: 'Error',
+            description: 'This command does not exist.',
+            color: '#fde65e'
+        }
+
+        await message.reply( { embeds: [em] } );
+        return;
+    }
+
     const exec = require(`./commands/${command}.js`)
-    await exec(message, users, initAcc)
+    await exec(message, users, initAcc, addCoins)
 });
 
 client.login(credentials.token)
