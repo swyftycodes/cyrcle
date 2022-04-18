@@ -1,4 +1,4 @@
-module.exports = async (message, users, initAcc, addCoins) => {
+module.exports = async (args, message, users, initAcc, addCoins) => {
 
   // define .random function
   Array.prototype.random = function () {
@@ -27,7 +27,7 @@ module.exports = async (message, users, initAcc, addCoins) => {
     const em = {
       title: 'failed',
       description: 'You failed to earn any coins (random messages will be added later)',
-      color: '#fde65e'
+      color: '#fc382a'
     }
 
     await message.reply( { embeds: [ em ] } )

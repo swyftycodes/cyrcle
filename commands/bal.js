@@ -1,4 +1,4 @@
-module.exports = async (message, users, initAcc) => {
+module.exports = async (args, message, users, initAcc) => {
     await initAcc(message.author.id)
     
     userDetails = await users.findOne({id: message.author.id})
