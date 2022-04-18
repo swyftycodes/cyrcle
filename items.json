@@ -1,0 +1,15 @@
+{
+    "testitem": {
+        "price": 69,
+        "sellPrice": 69,
+        "description": "A test item.",
+        "longDesc": "Lorem ipsum deez nuts hehehahaha very discriptive"
+    },
+
+    "testitem2": {
+        "price": 68,
+        "sellPrice": 68,
+        "description": "A test item 2 lmao wtf",
+        "longDesc": "Lorem ipsum adlkfaskd;lfjasdfk"
+    }
+}
