@@ -69,7 +69,7 @@ client.on('messageCreate', async message => {
         const em = {
             title: 'Error',
             description: 'This command does not exist.',
-            color: '#fde65e'
+            color: '#fc382a'
         }
 
         await message.reply( { embeds: [em] } );
@@ -77,7 +77,7 @@ client.on('messageCreate', async message => {
     }
 
     const exec = require(`./commands/${command}.js`)
-    await exec(message, users, initAcc, addCoins)
+    await exec(args, message, users, initAcc, addCoins)
 });
 
 client.login(credentials.token)
