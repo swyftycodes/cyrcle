@@ -1,5 +1,4 @@
-module.exports = async (args, message, users, initAcc, addCoins) => {
-
+module.exports = async (args, talkedRecently, message, users, initAcc, addCoins) => {
   // define .random function
   Array.prototype.random = function () {
     return this[Math.floor((Math.random()*this.length))];

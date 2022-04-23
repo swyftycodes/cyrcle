@@ -1,4 +1,4 @@
-module.exports = async (args, message, users, initAcc) => {
+module.exports = async (args, talkedRecently, message, users, initAcc) => {
   await initAcc(message.author.id);
 
   // require items.json
