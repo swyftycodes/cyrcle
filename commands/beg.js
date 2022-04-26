@@ -1,4 +1,10 @@
 module.exports = async (args, talkedRecently, message, users, initAcc, addCoins) => {
+
+  if ( talkedRecently.has(message.author.id) ) {
+    message.reply(`ur on a cooldown, frick off`);
+    return
+  }
+
   // define .random function
   Array.prototype.random = function () {
     return this[Math.floor((Math.random()*this.length))];
@@ -31,4 +37,10 @@ module.exports = async (args, talkedRecently, message, users, initAcc, addCoins)
 
     await message.reply( { embeds: [ em ] } )
   }
+
+  talkedRecently.add(message.author.id);
+  
+  setTimeout(() => {
+    talkedRecently.delete(message.author.id);
+  }, 5000)
 }
