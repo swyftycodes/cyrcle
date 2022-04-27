@@ -4,7 +4,7 @@ module.exports = async ( args, talkedRecently, message, users, initAcc ) => {
   let output = '';
 
   for ( const item in userDetails.items ) {
-    output += `${item}\n`;
+    output += `${item}: ${userDetails.items[item]}\n`;
   }
 
   // checks if inventory is empty
@@ -25,5 +25,5 @@ module.exports = async ( args, talkedRecently, message, users, initAcc ) => {
     color: '#fde56e'
   }
 
-  await message.reply(output);
+  await message.reply( { embeds: [em] } );
 }
