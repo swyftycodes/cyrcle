@@ -3,13 +3,15 @@
         "price": 69,
         "sellPrice": 69,
         "description": "A test item.",
-        "longDesc": "Lorem ipsum deez nuts hehehahaha very discriptive"
+        "longDesc": "Lorem ipsum deez nuts hehehahaha very discriptive",
+        "useable": true
     },
 
     "testitem2": {
         "price": 68,
         "sellPrice": 68,
         "description": "A test item 2 lmao wtf",
-        "longDesc": "Lorem ipsum adlkfaskd;lfjasdfk"
+        "longDesc": "Lorem ipsum adlkfaskd;lfjasdfk",
+        "useable": false
     }
 }
