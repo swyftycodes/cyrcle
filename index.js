@@ -53,11 +53,29 @@ async function addCoins(userId, amount) {
     await users.updateOne( { id: userId }, { $set: { coins: coins + amount } } );
 }
 
+async function removeCoins(userId, amount) {
+    const userDetails = await users.findOne( { id: userId } );
+    const coins = userDetails.coins;
+
+    await users.updateOne( { id: userId }, { $set: { coins: coins - amount } } );
+}
+
+async function addItem(userId, item, amount) {
+    const userDetails = await users.findOne( { id: userId } );
+
+    query = `items.${item}`
+
+    if (!userDetails.items.hasOwnProperty(item)) {
+        await users.updateOne( { id: userId }, { $set: { [query]: amount } } );
+    } else {
+        await users.updateOne( { id: userId }, { $set: { [query]: userDetails.items[item] + amount }} )
+    }
+}
+
 client.on('ready', async () => {
     await initMongo();
     console.log('MongoDB Init Complete.')
 
-    await initAcc('deeznuts')
     console.log('Init Complete.')
 })
 
@@ -79,7 +97,7 @@ client.on('messageCreate', async message => {
     }
 
     const exec = require(`./commands/${command}.js`)
-    await exec(args, talkedRecently, message, users, initAcc, addCoins)
+    await exec(args, talkedRecently, message, users, initAcc, addCoins, removeCoins, addItem);
 });
 
 client.login(credentials.token)

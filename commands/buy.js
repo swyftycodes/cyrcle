@@ -1,4 +1,4 @@
-module.exports = async ( args, talkedRecently, message, users, initAcc, addCoins, removeCoins ) => {
+module.exports = async ( args, talkedRecently, message, users, initAcc, addCoins, removeCoins, addItem ) => {
   await initAcc(message.author.id);
 
   const userDetails = await users.findOne( { id: message.author.id } );
@@ -29,13 +29,9 @@ module.exports = async ( args, talkedRecently, message, users, initAcc, addCoins
 
   await removeCoins(message.author.id, items[item].price * amount)
 
-  query = `items.${item}`
-
-  if (!userDetails.items.hasOwnProperty(item)) {
-    await users.updateOne( { id: message.author.id }, { $set: { [query]: amount } } );
-  } else {
-    await users.updateOne( { id: message.author.id }, { $set: { [query]: userDetails.items[item] + amount }} )
   }
+
+  await addItem(message.author.id, item, amount);
 
   const em = {
     title: 'Success!',
