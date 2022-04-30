@@ -34,6 +34,14 @@ module.exports = async ( args, talkedRecently, message, users, initAcc, addCoins
   if (!userDetails.items.hasOwnProperty(item)) {
     await users.updateOne( { id: message.author.id }, { $set: { [query]: amount } } );
   } else {
-    return;
+    await users.updateOne( { id: message.author.id }, { $set: { [query]: userDetails.items[item] + amount }} )
   }
+
+  const em = {
+    title: 'Success!',
+    description: `you bought ${amount} **${item}**`,
+    color: '#fde65e'
+  }
+
+  await message.reply( { embeds: [em] } );
 }
