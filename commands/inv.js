@@ -3,8 +3,10 @@ module.exports = async ( args, talkedRecently, message, users, initAcc ) => {
 
   let output = '';
 
+  const items = require('../items.json');
+
   for ( const item in userDetails.items ) {
-    output += `${item}: ${userDetails.items[item]}\n`;
+    output += `**${item}**: ${userDetails.items[item]}\n${items[item].description}\n\n`;
   }
 
   // checks if inventory is empty
